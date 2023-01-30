@@ -4,7 +4,6 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/mman.h>
-#include <stdio.h>
 
 #include "ppm.h"
 
@@ -92,9 +91,6 @@ void PPM_setPixel(struct PPM* img,
     pix[0] = (uint16_t)(p.r * img->maxval);
     pix[1] = (uint16_t)(p.g * img->maxval);
     pix[2] = (uint16_t)(p.b * img->maxval);
-    printf("(%f, %f, %f) = (%u, %u, %u)\n",
-           p.r, p.g, p.b,
-           pix[0], pix[1], pix[2]);
     lseek(img->fd, header_len + pixel_offset, SEEK_SET);
     write(img->fd, (void*)pix, 3*sizeof(uint16_t));
   }
