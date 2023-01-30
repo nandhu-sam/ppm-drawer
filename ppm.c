@@ -86,6 +86,8 @@ void PPM_setPixel(struct PPM* img,
     write(img->fd, (void*)pix, 3*sizeof(uint8_t));
   }
   else {
+    // Has trouble with endianness. This part of code
+    // should be fixed.
     uint16_t pix[3];
     pix[0] = (uint16_t)(p.r * img->maxval);
     pix[1] = (uint16_t)(p.g * img->maxval);
